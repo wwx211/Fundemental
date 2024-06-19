@@ -1,0 +1,61 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+struct Contact {
+    std::string name;
+    std::string phoneNumber;
+    std::string email;
+};
+
+void addContact(std::vector<Contact>& addressBook) {
+    Contact newContact;
+    std::cout << "Enter name: ";
+    std::getline(std::cin, newContact.name);
+    std::cout << "Enter phone number: ";
+    std::getline(std::cin, newContact.phoneNumber);
+    std::cout << "Enter email: ";
+    std::getline(std::cin, newContact.email);
+    
+    addressBook.push_back(newContact);
+    std::cout << "Contact added successfully.\n";
+}
+
+void displayContacts(const std::vector<Contact>& addressBook) {
+    std::cout << "Address Book:\n";
+    for (const auto& contact : addressBook) {
+        std::cout << "Name: " << contact.name << "\n";
+        std::cout << "Phone number: " << contact.phoneNumber << "\n";
+        std::cout << "Email: " << contact.email << "\n\n";
+    }
+}
+
+int main() {
+    std::vector<Contact> addressBook;
+    char choice;
+
+    do {
+        std::cout << "1. Add contact\n";
+        std::cout << "2. Display contacts\n";
+        std::cout << "3. Quit\n";
+        std::cout << "Enter your choice: ";
+        std::cin >> choice;
+        std::cin.ignore(); // Ignore the newline character left in the input buffer
+
+        switch (choice) {
+            case '1':
+                addContact(addressBook);
+                break;
+            case '2':
+                displayContacts(addressBook);
+                break;
+            case '3':
+                std::cout << "Exiting...\n";
+                break;
+            default:
+                std::cout << "Invalid choice. Please try again.\n";
+        }
+    } while (choice != '3');
+
+    return 0;
+}
